@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Word Count</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/4.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
+  </head>
+  <body>
+    <div class="container" align="center">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+        <label for="text">Please Insert your text:</label><br>
+        <textarea class="form-control" rows="10" cols="20" name="input_text" ></textarea><br>
+          <button class="btn btn-success" value="submit" type="submit">Submit</button>
+          <button class="btn btn-primary" type="submit" onclick="location.href='{% url 'home' %}'" name="reset">Reset</button>
+      </div>
+      </form>
+      {% if request.method == "POST" %}
+        {% if words %}
+          <h3>Total {{ n }} words</h3>
+          <h4>Unique words {{ l }}</h4>
+          {% for key, value in count.items %}
+            <p><strong>{{ key }}</strong> {{ value }} </p>
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+    </div>
+  </body>
+</html>
